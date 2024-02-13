@@ -42,7 +42,7 @@ az resource list --resource-group <name>
 
 ## Verifying and Testing the instance's properties
 
-As the API Management instance has been deployed, the bicep file also specifies an API and a product (along with a policy and an api link) to be added to the instance. These are specified in the [apim-resources.bicep]() file.
+As the API Management instance has been deployed, the bicep file also specifies an API and a product (along with a policy and an api link) to be added to the instance. These are specified in the [apim-resources.bicep](https://github.com/mpirotaiswilton-IW/APIM-Bicep-Deploy/blob/main/modules/apim-resources.bicep) file.
 
 To verify the API and product have been added to the API Management correctly, we must first find the API Management instance on the Azure Portal website:
 1. Using a web browser, go to <https://portal.azure.com/>. Sign-in with the same credentials as in your Azure CLI.
