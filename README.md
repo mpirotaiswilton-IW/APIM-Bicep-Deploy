@@ -26,15 +26,31 @@ This Github repo contains a bicep file to deploy a developer instance of an Azur
         ```
         az group create -n <name> -l <location>
         ```
-    1. To deploy the Azure API Management instance, run the following command, replacing **\<publisher-email>** and **\<publisher-name>** with the email address to receive notification and the name of the API publishers organization: 
+    1. Before deployment, make sure to change the `publisherEmail` and `publisherName` values in the [apim.parameters.json](https://github.com/mpirotaiswilton-IW/APIM-Bicep-Deploy/blob/main/config/apim.parameters.json) file:
+
+        ```json
+        ...
+        "parameters": {
+            "publisherEmail": {
+                "value": "your.email.address@provider.com" <!-- Change this value -->
+            },
+            "publisherName": {
+                "value": "publisher" <!-- Change this value -->
+            },
+            ...
+        }
+        ...
         ```
-        az deployment group create -g exampleRG -f main.bicep -p publisherEmail=<publisher-email> publisherName=<publisher-name>
+
+    1. To deploy the Azure API Management instance, run the following command: 
+        ```
+        az deployment group create -g exampleRG -f main.bicep -p '@.\config\apim.parameters.json'
         ```
         Deploying this instance will take a long time
 
-3. Once you receive a new email at your designated **\<publisher-email>**, the API Manager instance will have finished deploying and will be ready to use.
+3. Once you receive a new email at your designated **publisherEmail**, the API Manager instance will have finished deploying and will be ready to use.
 
-You can verify the instance has deployed by running the following command, replacing **\<name>** with the resource group name you want deleted: 
+You can verify the instance has deployed by running the following command, replacing **\<name>** with the resource group name you deployed the API Management instance: 
 
 ```
 az resource list --resource-group <name>
