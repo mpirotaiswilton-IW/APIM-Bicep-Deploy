@@ -46,7 +46,7 @@ This Github repo contains a bicep file to deploy a developer instance of an Azur
         ```
         az deployment group create -g exampleRG -f main.bicep -p '@.\config\apim.parameters.json'
         ```
-        Deploying this instance will take a long time
+        Deploying this instance will take a long time, roughly 30 minutes.
 
 3. Once you receive a new email at your designated **publisherEmail**, the API Manager instance will have finished deploying and will be ready to use.
 
