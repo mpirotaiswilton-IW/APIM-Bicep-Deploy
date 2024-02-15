@@ -15,23 +15,16 @@ param publisherName string
   'StandardV2' 
 ])
 param apimSku string = 'Developer'
+@allowed([
+  0
+  1
+  2
+])
+param apimSkuCount int = 1
 
 param apiPathName string = 'api'
 
 param location string = resourceGroup().location
-
-// resource apiManagementService 'Microsoft.ApiManagement/service@2022-08-01' = {
-//   name: apiManagementServiceName
-//   location: location
-//   sku: {
-//     name: sku
-//     capacity: skuCount
-//   }
-//   properties: {
-//     publisherEmail: publisherEmail
-//     publisherName: publisherName
-//   }
-// }
 
 module apim './modules/apim.bicep' = {
   name: 'apim'
@@ -41,6 +34,7 @@ module apim './modules/apim.bicep' = {
     publisherEmail: publisherEmail
     publisherName: publisherName
     sku: apimSku
+    skuCount: apimSkuCount
   }
 }
 

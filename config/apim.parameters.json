@@ -11,6 +11,9 @@
       "apimSku":{
         "value": "Developer"
       },
+      "apimSkuCount":{
+        "value": 1
+      },
       "apimServiceNamePrefix":{
         "value": "apiservice"
       },

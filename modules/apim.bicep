@@ -12,6 +12,11 @@ param publisherName string
   'StandardV2' 
 ])
 param sku string = 'Developer'
+@allowed([
+  0
+  1
+  2
+])
 param skuCount int = 1
 
 param location string = resourceGroup().location
