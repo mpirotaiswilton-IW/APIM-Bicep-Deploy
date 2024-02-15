@@ -1,6 +1,22 @@
-param apiManagementServiceName string = 'apiservice${uniqueString(resourceGroup().id)}'
+param apimServiceNamePrefix string = 'apiservice'
+
+param apiManagementServiceName string = '${apimServiceNamePrefix}${uniqueString(resourceGroup().id)}'
+
 param publisherEmail string
 param publisherName string
+@allowed([
+  'Basic'
+  'BasicV2'
+  'Consumption'
+  'Developer'
+  'Isolated'
+  'Premium'
+  'Standard'
+  'StandardV2' 
+])
+param apimSku string = 'Developer'
+
+param apiPathName string = 'api'
 
 param location string = resourceGroup().location
 
@@ -24,6 +40,7 @@ module apim './modules/apim.bicep' = {
     location: location
     publisherEmail: publisherEmail
     publisherName: publisherName
+    sku: apimSku
   }
 }
 
@@ -31,5 +48,9 @@ module apimResources './modules/apim-resources.bicep' = {
   name: 'apim-resources'
   params: {
     apiManagementServiceName: apiManagementServiceName
+    apiPathName: apiPathName
   }
+  dependsOn: [
+    apim
+  ]
 }

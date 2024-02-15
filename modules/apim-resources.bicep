@@ -1,16 +1,19 @@
 param apiManagementServiceName string
 
-resource exampleApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
-  name: '${apiManagementServiceName}/exampleApi'
+param apiPathName string = 'api'
+
+
+resource api 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
+  name: '${apiManagementServiceName}/${apiPathName}'
   properties:{
     format:'swagger-json'
     value: loadTextContent('../resources/api-spec.json')
-    path: 'exampleApi'
+    path: 'api'
   }
 }
 
 resource product 'Microsoft.ApiManagement/service/products@2022-08-01' = {
-  name: '${apiManagementServiceName}/exampleApi'
+  name: '${apiManagementServiceName}/${apiPathName}'
   properties:{
     displayName: 'Test Product'
     description: 'Test Product for APIM test'
@@ -32,9 +35,8 @@ resource policy 'Microsoft.ApiManagement/service/products/policies@2022-08-01' =
 
 resource exampleApiLink 'Microsoft.ApiManagement/service/products/apis@2022-08-01' = {
   parent: product
-  name: 'exampleApi'
+  name: apiPathName
   dependsOn:[
-    exampleApi
+    api
   ]
-
 }
